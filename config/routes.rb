@@ -1,4 +1,5 @@
 Wrfl::Application.routes.draw do
+  devise_for :users
   resources :plays
 
   resources :artists
@@ -6,6 +7,10 @@ Wrfl::Application.routes.draw do
   resources :albums
 
   resources :tracks
+
+  get '/playlist' => 'plays#new', as: :playlist
+
+  root to: 'plays#new'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

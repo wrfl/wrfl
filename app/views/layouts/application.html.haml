@@ -1,0 +1,40 @@
+!!! 5
+%html
+  %head
+    %title
+      = content_for(:page_title) ? yield(:page_title) : 'WRFL'
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
+
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+
+  %body
+    .container
+      .navbar
+        .navbar-form.pull-left
+          %h3
+            WRFL
+        %ul.nav.pull-right
+          - if current_user
+            %li
+              = link_to current_user.email, root_path, :class => "dropdown-toggle"
+            %li
+              = link_to 'Settings', edit_user_path(current_user)
+            %li
+              = link_to "Sign Out", destroy_user_session_path, method: :delete
+          - else
+            %li
+              = link_to "Sign In", new_user_session_path
+
+
+    .container
+      .content
+        - if notice
+          %p.info.alert-message= notice
+        - if alert
+          %p.warning.alert-message= alert
+        - if flash[:error]
+          %p.warning.alert-message= flash[:error]
+        = yield
+
