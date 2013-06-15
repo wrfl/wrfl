@@ -1,4 +1,12 @@
 Wrfl::Application.routes.draw do
+  resources :plays
+
+  resources :artists
+
+  resources :albums
+
+  resources :tracks
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
