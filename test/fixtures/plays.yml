@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  track_id: 1
+  album_id: 
+  user_id: 1
+  played_at: 2013-06-15 17:12:11
+
+two:
+  track_id: 1
+  album_id: 
+  user_id: 1
+  played_at: 2013-06-15 17:12:11

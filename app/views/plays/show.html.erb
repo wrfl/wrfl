@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Track:</strong>
+  <%= @play.track_id %>
+</p>
+
+<p>
+  <strong>Album:</strong>
+  <%= @play.album_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @play.user_id %>
+</p>
+
+<p>
+  <strong>Played at:</strong>
+  <%= @play.played_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_play_path(@play) %> |
+<%= link_to 'Back', plays_path %>

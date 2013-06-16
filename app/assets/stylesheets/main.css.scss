@@ -1,0 +1,12 @@
+body {
+  background-color: #FBFAF5;
+}
+
+.navbar-inverse .navbar-inner {
+  background-color: #5EAB99;
+  border: 0px;
+
+  & a, a, a:visited {
+    color: #fff;
+  }
+}
