@@ -1,3 +1,12 @@
-// Place all the styles related to the artists controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+  background-color: #FBFAF5;
+}
+
+.navbar-inverse .navbar-inner {
+  background-color: #5EAB99;
+  border: 0px;
+
+  & a, a, a:visited {
+    color: #fff;
+  }
+}

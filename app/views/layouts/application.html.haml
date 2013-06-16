@@ -10,22 +10,22 @@
     = csrf_meta_tags
 
   %body
-    .container
-      .navbar
-        .navbar-form.pull-left
-          %h3
+    .navbar.navbar-inverse
+      .navbar-inner
+        .container
+          %a.brand{ href: root_path }
             WRFL
-        %ul.nav.pull-right
-          - if current_user
-            %li
-              = link_to current_user.email, root_path, :class => "dropdown-toggle"
-            %li
-              = link_to 'Settings', edit_user_path(current_user)
-            %li
-              = link_to "Sign Out", destroy_user_session_path, method: :delete
-          - else
-            %li
-              = link_to "Sign In", new_user_session_path
+          %ul.nav.pull-right
+            - if current_user
+              %li
+                = link_to current_user.email, root_path, :class => "dropdown-toggle"
+              %li
+                = link_to 'Settings', edit_user_path(current_user)
+              %li
+                = link_to "Sign Out", destroy_user_session_path, method: :delete
+            - else
+              %li
+                = link_to "Sign In", new_user_session_path
 
 
     .container
