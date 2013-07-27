@@ -1,7 +1,7 @@
 Wrfl::Application.routes.draw do
 
   devise_for :users
-  resources :users
+  resources :users, only: [:show, :edit, :update]
 
   resources :plays
 

@@ -1,0 +1,34 @@
+= render 'form'
+
+%hr
+
+%table.table
+  %tr
+    %td
+      Time of Play
+    %td
+      Artist ID
+    %td
+      Track ID
+    %td
+      Album ID
+    %td
+      Playbox
+    %td
+      DJ Name
+  - @plays.each do |play|
+    %tr
+      %td
+        = play.played_at
+      %td
+        /= play.track.artist.name
+        artist name
+      %td
+        = play.track_id
+        = play.track.name if play.track
+      %td
+        = play.album_id
+      %td
+        playbox
+      %td 
+        = link_to play.user.dj_name, user_path(play.user)

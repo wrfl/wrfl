@@ -4,7 +4,8 @@ class PlaysController < ApplicationController
   # GET /plays
   # GET /plays.json
   def index
-    @plays = Play.all
+    @plays = Play.all.order('played_at DESC')
+    @play = Play.new
   end
 
   # GET /plays/1
@@ -25,10 +26,30 @@ class PlaysController < ApplicationController
   # POST /plays.json
   def create
     @play = Play.new(play_params)
+    
+    @play.played_at = Time.now
+    @play.user = current_user
+    
+        
+    if params[:artist_id].present?
+      artist = Artist.find(params[:artist_id])
+    end
+    if (artist_name=params[:artist_name]).present?
+      artist = Artist.find_or_create_by(name: artist_name)
+      puts artist.inspect
+    end
+    
+    if (track_name=params[:track_name]).present?
+      #track = Track.by_artist(artist).find_or_create_by(name: track_name, artist: artist)
+      track = Track.find_or_create_by(name: track_name, artist_id: artist.id)
+      puts track.inspect
+      
+      @play.track = track
+    end
 
     respond_to do |format|
       if @play.save
-        format.html { redirect_to @play, notice: 'Play was successfully created.' }
+        format.html { redirect_to plays_path, notice: 'Play was successfully created.' }
         format.json { render action: 'show', status: :created, location: @play }
       else
         format.html { render action: 'new' }
@@ -69,6 +90,7 @@ class PlaysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def play_params
-      params.require(:play).permit(:track_id, :album_id, :user_id, :played_at)
+      params.require(:play).permit(:track_id, :album_id, :user_id, :played_at,
+                                   :track_name, :album_name, :artist_name)
     end
 end
