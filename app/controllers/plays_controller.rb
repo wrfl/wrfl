@@ -26,26 +26,27 @@ class PlaysController < ApplicationController
   # POST /plays.json
   def create
     @play = Play.new(play_params)
-    
+
     @play.played_at = Time.now
     @play.user = current_user
-    
-        
+
+
     if params[:artist_id].present?
       artist = Artist.find(params[:artist_id])
-    end
-    if (artist_name=params[:artist_name]).present?
+    elsif (artist_name=params[:artist_name]).present?
       artist = Artist.find_or_create_by(name: artist_name)
-      puts artist.inspect
     end
-    
+
     if (track_name=params[:track_name]).present?
-      #track = Track.by_artist(artist).find_or_create_by(name: track_name, artist: artist)
       track = Track.find_or_create_by(name: track_name, artist_id: artist.id)
-      puts track.inspect
-      
       @play.track = track
     end
+
+    if (album_name=params[:album_name]).present?
+      album = Album.find_or_create_by(name: album_name)
+      @play.album = album
+    end
+
 
     respond_to do |format|
       if @play.save
