@@ -7,7 +7,7 @@
 
 <p>
   <strong>Artist:</strong>
-  <%= @track.artist_id %>
+  <%= link_to @track.artist.name, artist_path(@track.artist) %>
 </p>
 
 

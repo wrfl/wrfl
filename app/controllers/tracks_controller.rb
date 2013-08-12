@@ -5,26 +5,31 @@ class TracksController < ApplicationController
   # GET /tracks.json
   def index
     @tracks = Track.all
+    authorize! :read, @tracks
   end
 
   # GET /tracks/1
   # GET /tracks/1.json
   def show
+    authorize! :read, @track
   end
 
   # GET /tracks/new
   def new
     @track = Track.new
+    authorize! :create, @track
   end
 
   # GET /tracks/1/edit
   def edit
+    authorize! :update, @track
   end
 
   # POST /tracks
   # POST /tracks.json
   def create
     @track = Track.new(track_params)
+    authorize! :create, @track
 
     respond_to do |format|
       if @track.save
@@ -40,6 +45,7 @@ class TracksController < ApplicationController
   # PATCH/PUT /tracks/1
   # PATCH/PUT /tracks/1.json
   def update
+    authorize! :update, @track
     respond_to do |format|
       if @track.update(track_params)
         format.html { redirect_to @track, notice: 'Track was successfully updated.' }
@@ -54,6 +60,7 @@ class TracksController < ApplicationController
   # DELETE /tracks/1
   # DELETE /tracks/1.json
   def destroy
+    authorize! :destroy, @track
     @track.destroy
     respond_to do |format|
       format.html { redirect_to tracks_url }
