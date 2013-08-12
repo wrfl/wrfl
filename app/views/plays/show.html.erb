@@ -2,12 +2,12 @@
 
 <p>
   <strong>Track:</strong>
-  <%= @play.track_id %>
+  <%= link_to @play.track.name, track_path(@play.track) %>
 </p>
 
 <p>
   <strong>Album:</strong>
-  <%= @play.album_id %>
+  <%= @play.album.name %>
 </p>
 
 <p>
