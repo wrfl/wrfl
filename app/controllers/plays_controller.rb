@@ -6,26 +6,31 @@ class PlaysController < ApplicationController
   def index
     @plays = Play.all.order('played_at DESC')
     @play = Play.new
+    authorize! :create, Play
   end
 
   # GET /plays/1
   # GET /plays/1.json
   def show
+    authorize! :read, @play
   end
 
   # GET /plays/new
   def new
     @play = Play.new
+    authorize! :create, Play
   end
 
   # GET /plays/1/edit
   def edit
+    authorize! :update, @play
   end
 
   # POST /plays
   # POST /plays.json
   def create
     @play = Play.new(play_params)
+    authorize! :create, @play
 
     @play.played_at = Time.now
     @play.user = current_user
@@ -62,6 +67,7 @@ class PlaysController < ApplicationController
   # PATCH/PUT /plays/1
   # PATCH/PUT /plays/1.json
   def update
+    authorize! :update, @play
     respond_to do |format|
       if @play.update(play_params)
         format.html { redirect_to @play, notice: 'Play was successfully updated.' }
@@ -76,12 +82,22 @@ class PlaysController < ApplicationController
   # DELETE /plays/1
   # DELETE /plays/1.json
   def destroy
+    authorize! :destroy, @play
     @play.destroy
     respond_to do |format|
       format.html { redirect_to plays_url }
       format.json { head :no_content }
     end
   end
+
+  # POST /search-playlist
+  # POST /search-playlist.json
+#  def search
+    #q = "%#{params[:query]}%"
+    #@plays = Play.where("track like ? or artist like ?", q, q).order('played_at DESC').page(params[:page])
+
+#    authorize! :read, @plays
+#  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

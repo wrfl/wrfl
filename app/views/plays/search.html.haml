@@ -1,0 +1,16 @@
+= form_for(@play) do |f|
+  = f.hidden_field :track_id
+  = f.hidden_field :album_id
+
+  .field
+    = text_field_tag :artist_name, nil, placeholder: 'Artist Name'
+  .field
+    = text_field_tag :track_name, nil, placeholder: 'Track Name'
+  .field
+    = text_field_tag :album_name, nil, placeholder: 'Album Name'
+  .actions
+    = f.submit class: 'btn btn-primary'
+
+%hr
+
+= render 'plays', plays: @plays

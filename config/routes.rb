@@ -1,7 +1,7 @@
 Wrfl::Application.routes.draw do
 
   devise_for :users
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:index, :show, :edit, :update]
 
   resources :plays
 
@@ -11,9 +11,9 @@ Wrfl::Application.routes.draw do
 
   resources :tracks
 
-  get '/playlist' => 'plays#new', as: :playlist
+  get '/playlist' => 'plays#index', as: :playlist
 
-  root to: 'plays#new'
+  root to: 'plays#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -26,6 +26,8 @@ gem 'haml'
 gem 'cancan'
 gem 'devise', '~> 3.0.0.rc'
 
+gem 'kaminari' # for pagination
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
