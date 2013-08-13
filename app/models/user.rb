@@ -10,10 +10,10 @@ class User < ActiveRecord::Base
   end
 
   def staff?
-    true
+    role.present?
   end
 
   def admin?
-    false
+    role == 'admin'
   end
 end

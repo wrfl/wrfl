@@ -18,7 +18,7 @@ class Ability
       can :update, Play, user_id: user.id
       can :destroy, Play, user_id: user.id
 
-      can :update, User, user_id: user.id
+      can :update, User, id: user.id
 
       can :create, Album
       can :create, Artist

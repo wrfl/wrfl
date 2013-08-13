@@ -90,6 +90,15 @@ class PlaysController < ApplicationController
     end
   end
 
+  # POST /search-playlist
+  # POST /search-playlist.json
+#  def search
+    #q = "%#{params[:query]}%"
+    #@plays = Play.where("track like ? or artist like ?", q, q).order('played_at DESC').page(params[:page])
+
+#    authorize! :read, @plays
+#  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_play
