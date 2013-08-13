@@ -1,0 +1,19 @@
+%table.table.table-striped.table-bordered.table-condensed.table-hover
+  %tr
+    %td
+      Name
+    %td
+      DJ Name
+    %td
+      Role
+  - @users.each do |user|
+    %tr
+      %td
+        = link_to user.real_name, user_path(user)
+      %td
+        = link_to user.dj_name, user_path(user)
+      %td
+        - if user.role
+          = user.role.humanize
+
+= paginate @users

@@ -4,26 +4,31 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = user.all
+    @users = User.all.page(params[:page])
+    authorize! :read, @users
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    authorize! :read, @user
   end
 
   # GET /users/new
   def new
     @user = user.new
+    authorize! :create, @user
   end
 
   # GET /users/1/edit
   def edit
+    authorize! :update, @user
   end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    authorize! :update, @user
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'user was successfully updated.' }
@@ -43,7 +48,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :dj_name, :first_name, :last_name, 
+      params.require(:user).permit(:email, :dj_name, :first_name, :last_name,
                                    :phone_number)
     end
 end

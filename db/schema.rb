@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130727171246) do
+ActiveRecord::Schema.define(version: 20130813224601) do
 
   create_table "album_tracks", force: true do |t|
     t.integer  "track_id"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20130727171246) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "phone_number"
+    t.string   "role"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
