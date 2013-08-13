@@ -10,6 +10,10 @@
   <%= link_to @track.artist.name, artist_path(@track.artist) %>
 </p>
 
+<p>
+  <strong>Track:</strong>
+  <%= @track.inspect %>
+</p>
 
 <%= link_to 'Edit', edit_track_path(@track) %> |
 <%= link_to 'Back', tracks_path %>
