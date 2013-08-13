@@ -11,8 +11,8 @@
 </p>
 
 <p>
-  <strong>Track:</strong>
-  <%= @track.inspect %>
+  <strong>Plays:</strong>
+  All time: <%= @track.plays.count %>
 </p>
 
 <%= link_to 'Edit', edit_track_path(@track) %> |

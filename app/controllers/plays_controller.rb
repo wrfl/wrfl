@@ -4,7 +4,7 @@ class PlaysController < ApplicationController
   # GET /plays
   # GET /plays.json
   def index
-    @plays = Play.all.order('played_at DESC')
+    @plays = Play.all.order('played_at DESC').page(params[:page])
     @play = Play.new
     authorize! :create, Play
   end
