@@ -5,26 +5,31 @@ class ArtistsController < ApplicationController
   # GET /artists.json
   def index
     @artists = Artist.all
+    authorize! :read, @artists
   end
 
   # GET /artists/1
   # GET /artists/1.json
   def show
+    authorize! :read, @artist
   end
 
   # GET /artists/new
   def new
     @artist = Artist.new
+    authorize! :create, @artist
   end
 
   # GET /artists/1/edit
   def edit
+    authorize! :update, @artist
   end
 
   # POST /artists
   # POST /artists.json
   def create
     @artist = Artist.new(artist_params)
+    authorize! :create, @artist
 
     respond_to do |format|
       if @artist.save
@@ -40,6 +45,7 @@ class ArtistsController < ApplicationController
   # PATCH/PUT /artists/1
   # PATCH/PUT /artists/1.json
   def update
+    authorize! :update, @artist
     respond_to do |format|
       if @artist.update(artist_params)
         format.html { redirect_to @artist, notice: 'Artist was successfully updated.' }
@@ -54,6 +60,7 @@ class ArtistsController < ApplicationController
   # DELETE /artists/1
   # DELETE /artists/1.json
   def destroy
+    authorize! :destroy, @artist
     @artist.destroy
     respond_to do |format|
       format.html { redirect_to artists_url }
