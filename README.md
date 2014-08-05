@@ -1,3 +1,7 @@
+# WRFL
+
+![screenshot](https://raw.githubusercontent.com/LexLadiesCode/wrfl/master/screenshot.png)
+
 ## How to Run
 
 1. `bundle`
