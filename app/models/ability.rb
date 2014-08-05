@@ -9,6 +9,9 @@ class Ability
 
   def initialize user
     user ||= User.new # guest user (not logged in)
+    if user.normal?
+      can :read, :all
+    end
     if user.admin?
       can :manage, :all
     end

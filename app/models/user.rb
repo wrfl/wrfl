@@ -5,12 +5,20 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  VALID_ROLES = %w(normal staff admin).freeze
+
+  validates :role, presence: true, inclusion: {in: VALID_ROLES}
+
   def real_name
     first_name + " " + last_name
   end
 
+  def normal?
+    role == 'normal'
+  end
+
   def staff?
-    role.present?
+    role == 'staff'
   end
 
   def admin?
