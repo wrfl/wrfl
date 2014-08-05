@@ -1,5 +1,7 @@
 # WRFL
 
+**[List of issues / tasks](https://github.com/wrfl/wrfl/issues)**
+
 ![screenshot](https://raw.githubusercontent.com/LexLadiesCode/wrfl/master/screenshot.png)
 
 ## How to Run
