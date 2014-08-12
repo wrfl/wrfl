@@ -9,8 +9,12 @@ class User < ActiveRecord::Base
 
   validates :role, presence: true, inclusion: {in: VALID_ROLES}
 
+  def name
+    dj_name.presence || real_name.presence || email
+  end
+
   def real_name
-    first_name + " " + last_name
+    "#{first_name} #{last_name}"
   end
 
   def normal?
