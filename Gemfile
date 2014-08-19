@@ -35,3 +35,4 @@ gem 'kaminari' # for pagination
 
 # To use debugger
 # gem 'debugger'
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
