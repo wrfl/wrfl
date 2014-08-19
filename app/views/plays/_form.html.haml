@@ -2,6 +2,11 @@
   = f.hidden_field :track_id
   = f.hidden_field :album_id
 
+  - if @play.errors.any?
+    #error_explanation.alert.alert-danger
+      %ul.list-unstyled
+        - @play.errors.full_messages.each do |msg|
+          %li= msg
   .form-group
     = label_tag :artist_name, 'Artist:', class: 'sr-only'
     = text_field_tag :artist_name, nil, placeholder: 'Artist', class: 'form-control'
