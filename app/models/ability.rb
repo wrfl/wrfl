@@ -7,12 +7,14 @@ class Ability
   # - admin
   # - directors??
 
-  def initialize(user)
+  def initialize user
     user ||= User.new # guest user (not logged in)
+    if user.normal?
+      can :read, :all
+    end
     if user.admin?
       can :manage, :all
     end
-
     if user.staff?
       can :create, Play
       can :update, Play, user_id: user.id
