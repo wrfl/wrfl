@@ -1,10 +1,10 @@
 class PlaysController < ApplicationController
   before_action :set_play, only: [:show, :edit, :update, :destroy]
+  before_action :set_plays, only: [:index, :create]
 
   # GET /plays
   # GET /plays.json
   def index
-    @plays = Play.all.order('played_at DESC').page(params[:page])
     @play = Play.new
     authorize! :create, Play
   end
@@ -42,7 +42,7 @@ class PlaysController < ApplicationController
       artist = Artist.find_or_create_by(name: artist_name)
     end
 
-    if (track_name=params[:track_name]).present?
+    if (track_name=params[:track_name]).present? && artist
       track = Track.find_or_create_by(name: track_name, artist_id: artist.id)
       @play.track = track
     end
@@ -52,13 +52,12 @@ class PlaysController < ApplicationController
       @play.album = album
     end
 
-
     respond_to do |format|
       if @play.save
         format.html { redirect_to plays_path, notice: 'Play was successfully created.' }
         format.json { render action: 'show', status: :created, location: @play }
       else
-        format.html { render action: 'new' }
+        format.html { render action: 'index' }
         format.json { render json: @play.errors, status: :unprocessable_entity }
       end
     end
@@ -103,6 +102,10 @@ class PlaysController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_play
       @play = Play.find(params[:id])
+    end
+
+    def set_plays
+      @plays = Play.all.order('played_at DESC').page(params[:page])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
