@@ -1,6 +1,10 @@
 class Track < ActiveRecord::Base
+  belongs_to :artist
+
   has_many :plays
   has_many :album_tracks
+
   has_one :album, through: :album_tracks
-  belongs_to :artist
+
+  validates :artist, presence: true
 end

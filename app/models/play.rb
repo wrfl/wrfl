@@ -5,5 +5,4 @@ class Play < ActiveRecord::Base
 
   validates :album, presence: true
   validates :track, presence: true
-
 end
