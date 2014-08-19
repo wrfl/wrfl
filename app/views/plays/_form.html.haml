@@ -1,12 +1,20 @@
-= form_for(@play) do |f|
+= form_for(@play, html: {class: 'form-inline'}) do |f|
   = f.hidden_field :track_id
   = f.hidden_field :album_id
 
-  .field
-    = text_field_tag :artist_name, nil, placeholder: 'Artist Name'
-  .field
-    = text_field_tag :track_name, nil, placeholder: 'Track Name'
-  .field
-    = text_field_tag :album_name, nil, placeholder: 'Album Name'
-  .actions
+  - if @play.errors.any?
+    #error_explanation.alert.alert-danger
+      %ul.list-unstyled
+        - @play.errors.full_messages.each do |msg|
+          %li= msg
+  .form-group
+    = label_tag :artist_name, 'Artist:', class: 'sr-only'
+    = text_field_tag :artist_name, nil, placeholder: 'Artist', class: 'form-control'
+  .form-group
+    = label_tag :track_name, 'Track:', class: 'sr-only'
+    = text_field_tag :track_name, nil, placeholder: 'Track', class: 'form-control'
+  .form-group
+    = label_tag :album_name, 'Album:', class: 'sr-only'
+    = text_field_tag :album_name, nil, placeholder: 'Album', class: 'form-control'
+  .form-group
     = f.submit class: 'btn btn-primary'
