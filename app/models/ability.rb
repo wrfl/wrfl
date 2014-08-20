@@ -66,7 +66,9 @@ class Ability
     can :destroy, User, id: @user.id
 
     if @user.admin?
-      can :manage, User
+      can :read, User
+      can :update, User
+      can :destroy, User
     end
   end
 end

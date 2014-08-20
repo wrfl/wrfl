@@ -1,23 +1,17 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  skip_authorization_check only: [:index]
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all.page(params[:page])
-    authorize! :read, @users
+    @users = User.page(page).per(per_page).accessible_by(current_ability)
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
     authorize! :read, @user
-  end
-
-  # GET /users/new
-  def new
-    @user = user.new
-    authorize! :create, @user
   end
 
   # GET /users/1/edit
@@ -28,10 +22,23 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    old_role = @user.role
     authorize! :update, @user
+    @user.assign_attributes user_params
+    if @user.role != old_role && !@user.admin?
+      message = 'Cannot change user role.'
+      respond_to do |format|
+        format.html {
+          flash[:warning] = message
+          redirect_to @user
+        }
+        format.json { render json: {error: message, status: :unauthorized} }
+      end
+      return
+    end
     respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'user was successfully updated.' }
+      if @user.save
+        format.html { redirect_to @user, notice: 'Updated!' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -41,14 +48,14 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:email, :dj_name, :first_name, :last_name,
-                                   :phone_number)
-    end
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :dj_name, :first_name, :last_name,
+                                 :phone_number, :password,
+                                 :password_confirmation, :role)
+  end
 end

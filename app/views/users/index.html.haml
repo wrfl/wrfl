@@ -5,6 +5,7 @@
       %th Email
       %th DJ Name
       %th Role
+      %th
   %tbody
     - @users.each do |user|
       %tr
@@ -19,5 +20,8 @@
         %td
           - if user.role
             = user.role.humanize
+        %td
+          - if can? :update, user
+            = link_to 'Edit', edit_user_path(user)
 
 = paginate @users

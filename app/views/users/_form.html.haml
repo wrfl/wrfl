@@ -15,6 +15,11 @@
     = f.label :phone_number, 'Phone number:', class: 'control-label col-sm-5 col-md-4'
     .col-sm-7.col-md-8
       = f.text_field :phone_number, class: 'form-control'
+  - if current_user.admin?
+    .form-group
+      = f.label :role, 'Role:', class: 'control-label col-sm-5 col-md-4'
+      .col-sm-7.col-md-8
+        = f.select :role, User::VALID_ROLES, {}, class: 'form-control'
   .form-group
     .col-sm-7.col-sm-offset-5.col-md-8.col-md-offset-4
       = f.submit class: 'btn btn-primary'
