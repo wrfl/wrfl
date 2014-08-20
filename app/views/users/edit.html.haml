@@ -1,5 +1,9 @@
 .page-header
-  %h1 Edit User
+  %h1
+    - if @user == current_user
+      Your Profile
+    - else
+      Edit User
 
 .row
   .col-sm-6
@@ -7,5 +11,6 @@
 
 - if can? :destroy, @user
   %hr
-  .pull-right
-    = link_to 'Disable User', @user, method: :delete, class: 'btn btn-danger'
+  .clearfix
+    .pull-right
+      = link_to 'Disable User', @user, method: :delete, class: 'btn btn-danger'
