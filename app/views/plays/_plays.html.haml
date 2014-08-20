@@ -1,34 +1,30 @@
-%table.table
-  %tr
-    %td
-      Time of Play
-    %td
-      Artist
-    %td
-      Track
-    %td
-      Album
-    %td
-      Playbox
-    %td
-      DJ Name
-  - plays.each do |play|
+%table.table.table-striped
+  %thead
     %tr
-      %td
-        = play.played_at
-      %td
-        - if play.track && play.track.artist
-          = link_to play.track.artist.name, artist_path(play.track.artist)
-      %td
-        - if play.track
-          = link_to "#{play.track.name}", track_path(play.track)
-      %td
-        - if play.album
-          = link_to "#{play.album.name}", album_path(play.album)
-      %td
-        playbox
-      %td
-        / = link_to play.user.dj_name, user_path(play.user)
-        = play.user.inspect
+      %th Artist
+      %th Track
+      %th Album
+      %th Playbox
+      %th DJ Name
+      %th
+  %tbody
+    - plays.each do |play|
+      %tr
+        %td
+          - if play.track && play.track.artist
+            = link_to play.track.artist.name, artist_path(play.track.artist)
+        %td
+          - if play.track
+            = link_to "#{play.track.name}", track_path(play.track)
+        %td
+          - if play.album
+            = link_to "#{play.album.name}", album_path(play.album)
+        %td
+          playbox
+        %td
+          / = link_to play.user.dj_name, user_path(play.user)
+          = play.user.name
+        %td
+          %time= play.played_at
 
 = paginate plays

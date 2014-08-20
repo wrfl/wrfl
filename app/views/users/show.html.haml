@@ -1,15 +1,21 @@
-%h1
-  = @user.dj_name
-  %small
-    = link_to 'Edit', edit_user_path(@user)
+.page-header
+  %h1= @user.name
 
-%ul
-  %li
-    Name:
-    = @user.real_name
-  %li
-    Phone Number:
-    = @user.phone_number
-  %li
-    Role:
-    = @user.role
+%dl.dl-horizontal
+  %dt Name:
+  %dd= @user.real_name
+  %dt DJ name:
+  %dd= @user.dj_name
+  %dt Email:
+  %dd
+    = mail_to @user.email do
+      %i.fa.fa-envelope-o
+      = @user.email
+  %dt Phone number:
+  %dd= @user.phone_number
+  %dt Role:
+  %dd= @user.role
+
+- if can? :update, @user
+  %p
+    = link_to 'Edit', edit_user_path(@user)

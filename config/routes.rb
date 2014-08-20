@@ -1,5 +1,4 @@
 Wrfl::Application.routes.draw do
-
   devise_for :users
   resources :users, only: [:index, :show, :edit, :update]
 
@@ -13,7 +12,15 @@ Wrfl::Application.routes.draw do
 
   get '/playlist' => 'plays#index', as: :playlist
 
-  root to: 'plays#index'
+  authenticated :user do
+    root to: 'plays#index'
+  end
+
+  unauthenticated do
+    devise_scope :user do
+      root to: 'devise/sessions#new', as: :unauthenticated
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

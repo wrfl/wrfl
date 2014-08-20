@@ -1,19 +1,27 @@
-%table.table.table-striped.table-bordered.table-condensed.table-hover
-  %tr
-    %td
-      Name
-    %td
-      DJ Name
-    %td
-      Role
-  - @users.each do |user|
+%table.table.table-striped
+  %thead
     %tr
-      %td
-        = link_to user.real_name, user_path(user)
-      %td
-        = link_to user.dj_name, user_path(user)
-      %td
-        - if user.role
-          = user.role.humanize
+      %th Name
+      %th Email
+      %th DJ Name
+      %th Role
+      %th
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td
+          %strong= link_to user.real_name, user_path(user)
+        %td
+          = mail_to user.email do
+            %i.fa.fa-envelope-o
+            = user.email
+        %td
+          = user.dj_name.presence || 'none'
+        %td
+          - if user.role
+            = user.role.humanize
+        %td
+          - if can? :update, user
+            = link_to 'Edit', edit_user_path(user)
 
 = paginate @users
