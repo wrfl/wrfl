@@ -28,4 +28,8 @@ class User < ActiveRecord::Base
   def admin?
     role == 'admin'
   end
+
+  def to_s
+    name
+  end
 end

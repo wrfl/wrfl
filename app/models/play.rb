@@ -5,4 +5,8 @@ class Play < ActiveRecord::Base
 
   validates :album, presence: true
   validates :track, presence: true
+
+  def to_s
+    "#{track} on #{album} played by #{user}"
+  end
 end
